@@ -68,6 +68,7 @@
     <Compile Include="Assets\BrokenVector\LowPolyDungeon\Demo Scenes\ScreenshotMaker.cs" />
     <Compile Include="Assets\Scripts\StateMachine\Player\PlayerJumpingState.cs" />
     <Compile Include="Assets\BrokenVector\LowPolyDungeon\Demo Scenes\PlayerMovement.cs" />
+    <Compile Include="Assets\Scripts\StateMachine\Player\PlayerFallingState.cs" />
     <Compile Include="Assets\Scripts\StateMachine\StateMachine.cs" />
     <Compile Include="Assets\Scripts\ForceReceiver.cs" />
   </ItemGroup>

@@ -364,6 +364,7 @@
 "Assets/InputSystem/InputReader.cs"
 "Assets/Scripts/ForceReceiver.cs"
 "Assets/Scripts/StateMachine/Player/PlayerBaseState.cs"
+"Assets/Scripts/StateMachine/Player/PlayerFallingState.cs"
 "Assets/Scripts/StateMachine/Player/PlayerFreeLookState.cs"
 "Assets/Scripts/StateMachine/Player/PlayerJumpingState.cs"
 "Assets/Scripts/StateMachine/Player/PlayerStateMachine.cs"

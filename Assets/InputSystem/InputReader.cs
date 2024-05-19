@@ -6,7 +6,7 @@ public class InputReader : MonoBehaviour, InputActions.IPlayerActions
 {
     private InputActions inputActions;
 
-    private event Action JumpEvent;
+    public event Action JumpEvent;
 
     public Vector2 MovementValue { get; private set; }
 

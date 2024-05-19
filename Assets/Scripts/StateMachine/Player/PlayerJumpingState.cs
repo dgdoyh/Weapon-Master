@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerJumpingState : PlayerBaseState
@@ -16,13 +14,20 @@ public class PlayerJumpingState : PlayerBaseState
 
         currVelocity = stateMachine.CharacterController.velocity;
         currVelocity.y = 0;
+
+        stateMachine.Animator.SetTrigger("Jump");
     }
 
     public override void Tick(float deltaTime)
     {
         Move(currVelocity, deltaTime);
 
-        // ...
+        // Jump -> Fall transition
+        if (stateMachine.CharacterController.velocity.y >= 0f)
+        {
+            stateMachine.SwitchState(new PlayerFallingState(stateMachine));
+            return;
+        }     
     }
 
     public override void Exit()

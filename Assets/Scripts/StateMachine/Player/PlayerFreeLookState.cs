@@ -2,23 +2,23 @@ using UnityEngine;
 
 public class PlayerFreeLookState : PlayerBaseState
 {
-    private readonly int FreeLookBlendTreeHash = Animator.StringToHash("FreeLookBlendTree");
     private readonly int FreeLookSpeedHash = Animator.StringToHash("FreeLookSpeed");
-
     private const float AnimatorDampTime = 0.05f;
-
-    private const float CrossFadeDuration = 0.1f;  // for smooth animation transition
 
     public PlayerFreeLookState(PlayerStateMachine stateMachine) : base(stateMachine) { }
 
     public override void Enter()
     {
-        // previous animation -> FreeLookBlendTree
-        stateMachine.Animator.CrossFadeInFixedTime(FreeLookBlendTreeHash, CrossFadeDuration);
+        #region Event Subscription
+        stateMachine.InputReader.JumpEvent += SwitchStateToJump;
+        #endregion
+
+        stateMachine.Animator.SetTrigger("FreeLook");
     }
 
     public override void Tick(float deltaTime)
     {
+        #region Move
         Vector3 movement = CalculateMovement();
         float speed = stateMachine.FreeLookMovementSpeed;
         bool isMoving = stateMachine.InputReader.MovementValue != Vector2.zero;
@@ -34,11 +34,23 @@ public class PlayerFreeLookState : PlayerBaseState
         {
             stateMachine.Animator.SetFloat(FreeLookSpeedHash, 0, AnimatorDampTime, deltaTime);
         }
+        #endregion
     }
 
     public override void Exit()
     {
+        #region Event Unsubscription
+        stateMachine.InputReader.JumpEvent -= SwitchStateToJump;
+        #endregion
+    }
 
+    private void FaceMovementDirection(Vector3 movement, float deltaTime)
+    {
+        // Smoothly rotate player (based on RotationDamping) toward moving direction
+        stateMachine.transform.rotation = Quaternion.Lerp(
+            stateMachine.transform.rotation,
+            Quaternion.LookRotation(movement),
+            deltaTime * stateMachine.RotationSpeed);
     }
 
     private Vector3 CalculateMovement()
@@ -58,12 +70,8 @@ public class PlayerFreeLookState : PlayerBaseState
         return (right * movementX) + (forward * movementY);
     }
 
-    private void FaceMovementDirection(Vector3 movement, float deltaTime)
+    private void SwitchStateToJump()
     {
-        // Smoothly rotate player (based on RotationDamping) toward moving direction
-        stateMachine.transform.rotation = Quaternion.Lerp(
-            stateMachine.transform.rotation,
-            Quaternion.LookRotation(movement),
-            deltaTime * stateMachine.RotationSpeed);
+        stateMachine.SwitchState(new PlayerJumpingState(stateMachine));
     }
 }

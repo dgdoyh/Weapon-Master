@@ -17,5 +17,10 @@ public abstract class PlayerBaseState : State
     protected void Move(Vector3 motion, float deltaTime)
     {
         stateMachine.CharacterController.Move((motion + stateMachine.ForceReceiver.Movement) * deltaTime);
+    }   
+
+    protected void ReturnToLocomotion()
+    {
+        stateMachine.SwitchState(new PlayerFreeLookState(stateMachine));
     }
 }

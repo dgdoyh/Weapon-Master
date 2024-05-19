@@ -2,9 +2,9 @@ using UnityEngine;
 
 public class StateMachine : MonoBehaviour
 {
-    private State currentState;
+    private PlayerBaseState currentState;
 
-    public void SwitchState(State newState)
+    public void SwitchState(PlayerBaseState newState)
     {
         currentState?.Exit();
         currentState = newState;
@@ -15,5 +15,4 @@ public class StateMachine : MonoBehaviour
     {
         currentState?.Tick(Time.deltaTime);
     }
-
 }

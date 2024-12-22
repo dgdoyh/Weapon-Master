@@ -2,9 +2,9 @@ using UnityEngine;
 
 public class StateMachine : MonoBehaviour
 {
-    private PlayerBaseState currentState;
+    private State currentState;
 
-    public void SwitchState(PlayerBaseState newState)
+    public void SwitchState(State newState)
     {
         currentState?.Exit();
         currentState = newState;

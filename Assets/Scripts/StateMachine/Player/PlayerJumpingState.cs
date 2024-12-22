@@ -22,12 +22,14 @@ public class PlayerJumpingState : PlayerBaseState
     {
         Move(currVelocity, deltaTime);
 
-        // Jump -> Fall transition
+        #region Transition (Jump -> Fall)
+
         if (stateMachine.CharacterController.velocity.y >= 0f)
         {
             stateMachine.SwitchState(new PlayerFallingState(stateMachine));
-            return;
-        }     
+        }
+
+        #endregion
     }
 
     public override void Exit()

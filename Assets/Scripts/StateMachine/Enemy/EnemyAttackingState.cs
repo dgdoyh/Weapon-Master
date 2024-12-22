@@ -19,6 +19,7 @@ public class EnemyAttackingState : State
 
     public override void Enter()
     {
+        stateMachine.Weapon.SetDamage(stateMachine.AttackDamage);
         animator.SetTrigger("Attack");
     }
 

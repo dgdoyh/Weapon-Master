@@ -8,12 +8,14 @@ using UnityEngine.AI;
 
 public class EnemyStateMachine : StateMachine
 {
-    [SerializeField] public Transform Player;
-    [SerializeField] public PatrolPath PatrolPath;
-    [SerializeField] public float AttackingRadius = 2f;
+    [field: SerializeField] public Transform Player { get; private set; }
+    [field: SerializeField] public PatrolPath PatrolPath { get; private set; }
+    [field: SerializeField] public Weapon Weapon { get; private set; }
 
+    [SerializeField] public float AttackingRadius { get; private set; } = 2f;
     [SerializeField] public float PatrolSpeed { get; private set; } = 2f;
     [SerializeField] public float ChasingSpeed { get; private set; } = 3f;
+    [SerializeField] public int AttackDamage { get; private set; } = 10;
 
     public Animator Animator { get; private set; }
     public CharacterController Controller { get; private set; }

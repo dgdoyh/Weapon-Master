@@ -2,21 +2,21 @@ using UnityEngine;
 
 public class WeaponHandler : MonoBehaviour
 {
-    private GameObject weapon;
+    [SerializeField] private GameObject weapon;
 
     private void Start()
     {
-        weapon = GetComponentInChildren<Weapon>().gameObject;
-
         weapon.SetActive(false);
     }
 
-    public void TurnOnCollider()
+    // Attack animation event
+    public void EnableWeapon()
     {
         weapon.SetActive(true);
     }
 
-    public void TurnOffCollider()
+    // Attack animation event
+    public void DisableWeapon()
     {
         weapon.SetActive(false);
     }

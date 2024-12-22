@@ -28,6 +28,8 @@ public class HpBarManager : MonoBehaviour
     public void UpdateHpBar()
     {
         bar.fillAmount = health.CurrHp / health.MaxHp;
+
+        Debug.Log("bar updated");
     }
 
     public void TurnOffHpBar()

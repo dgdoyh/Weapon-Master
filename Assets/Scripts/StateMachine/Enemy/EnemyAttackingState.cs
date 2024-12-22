@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -8,7 +6,6 @@ public class EnemyAttackingState : State
     EnemyStateMachine stateMachine;
     Animator animator;
     NavMeshAgent navMeshAgent;
-
 
     public EnemyAttackingState(EnemyStateMachine stateMachine)
     {
@@ -30,10 +27,20 @@ public class EnemyAttackingState : State
         {
             stateMachine.SwitchState(new EnemyChasingState(stateMachine));
         }
+
+        LookPlayer();
     }
 
     public override void Exit()
     {
         
+    }
+
+    private void LookPlayer()
+    {
+        Vector3 lookPos = stateMachine.Player.transform.position - stateMachine.transform.position;
+        lookPos.y = 0f;
+
+        navMeshAgent.transform.rotation = Quaternion.LookRotation(lookPos);
     }
 }

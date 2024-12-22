@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-
 public class EnemyChasingState : State
 {
     private EnemyStateMachine stateMachine;
@@ -12,7 +11,6 @@ public class EnemyChasingState : State
     private Animator animator;
 
     private float attackingRadius;
-
 
     public EnemyChasingState(EnemyStateMachine stateMachine)
     {
